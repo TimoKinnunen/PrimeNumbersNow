@@ -1,0 +1,125 @@
+﻿<Page
+    x:Class="PrimeNumbersNow.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentGrid.Margin" Value="0,0,4,4"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="PageContentGrid.Margin" Value="24,0,4,4"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0" 
+                   Style="{StaticResource PrimeNumbersNowTitleTextBlockStyle}" 
+                   Text="Home"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="HomeAppBarButton"
+                              Label="Home"
+                              Icon="Home"/>
+                <AppBarButton x:Name="ExportDataAppBarButton"
+                              Tapped="ExportDataAppBarButton_Tapped"
+                              Label="Export data"
+                              ToolTipService.ToolTip="Export primenumbers to .json-file from SQLite-database."
+                              Icon="Save"/>
+                <ProgressRing x:Name="ExportDataProgressRing"
+                              VerticalAlignment="Center"
+                              Visibility="Collapsed"
+                              Margin="4,0,4,0"/>
+                <AppBarButton x:Name="CompareDataAppBarButton"
+                              Tapped="CompareDataAppBarButton_Tapped"
+                              Label="Compare data"
+                              ToolTipService.ToolTip="Compare primenumbers in SQLite-database against known primenumbers."
+                              Icon="Highlight"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--page content goes here-->
+        <Grid x:Name="PageContentGrid"
+              Grid.Row="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel x:Name="BiggestPrimeNumberStackPanel"
+                        Margin="0,4,0,4"
+                        Grid.Row="0">
+
+                <TextBlock x:Name="BiggestPrimeNumberHeaderTextBlock"
+                           Text="Biggest primenumber"
+                           Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"/>
+                <TextBlock x:Name="BiggestPrimeNumberTextBlock"
+                           IsTextSelectionEnabled="True"
+                           TextWrapping="Wrap"
+                           Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"/>
+                <TextBlock x:Name="NumberOfPrimenumbersHeaderTextBlock"
+                           Text="Number of primenumbers"
+                           Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"/>
+                <TextBlock x:Name="NumberOfPrimenumbersTextBlock"
+                           IsTextSelectionEnabled="True"
+                           TextWrapping="Wrap"
+                           Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"/>
+            </StackPanel>
+
+            <TextBox x:Name="SearchPrimeNumberTextBox"
+                     Grid.Row="1"
+                     HorizontalAlignment="Stretch"
+                     Header="Enter primenumber to search"
+                     PlaceholderText="Enter primenumber to search"
+                     InputScope="Number"
+                     TextChanged="SearchPrimeNumberTextChanged"
+                     Style="{StaticResource PrimeNumbersNowBodyTextBoxStyle}"/>
+
+            <ListView x:Name="PrimeNumberListView"
+                      HorizontalAlignment="Stretch"
+                      Grid.Row="2"
+                      SelectionMode="Single"
+                      Margin="0,4,4,4">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding PrimeNumber}"
+                                   Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}" 
+                                   IsTextSelectionEnabled="True"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <!--page content goes here-->
+
+    </Grid>
+</Page>

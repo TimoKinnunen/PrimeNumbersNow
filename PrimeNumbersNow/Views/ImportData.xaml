@@ -1,0 +1,101 @@
+﻿<Page
+    x:Class="PrimeNumbersNow.Views.ImportData"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentGrid.Margin" Value="0,0,4,4"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                        <Setter Target="PageContentGrid.Margin" Value="24,0,4,4"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0"
+                   Style="{StaticResource PrimeNumbersNowTitleTextBlockStyle}" 
+                   Text="Import data"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="HomeAppBarButton"
+                              Tapped="HomeAppBarButton_Tapped"
+                              Label="Home"
+                              Icon="Home"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--page content goes here-->
+        <Grid x:Name="PageContentGrid"
+              Grid.Row="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel x:Name="ImportDataStackPanel" 
+                        Grid.Row="0"
+                        Orientation="Horizontal"
+                        Margin="0,4,0,4">
+                <Button x:Name="ImportDataButton"
+                        Margin="0,0,4,0"
+                        Style="{StaticResource ButtonRevealStyle}"
+                        ToolTipService.ToolTip="Import primenumbers from a .json-file."
+                        Content="Import data"
+                        Tapped="ImportDataButton_Tapped"/>
+                <ProgressRing x:Name="ImportDataProgressRing"
+                              VerticalAlignment="Center"
+                              Margin="4,0,4,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1"
+                        Margin="0,4,0,4">
+                <TextBlock Style="{StaticResource PrimeNumbersNowSubTitleTextBlockStyle}">Import data</TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}">
+                    Warning: When you import data from a .json-file, you will lose all earlier calculated primenumbers.
+                </TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}">
+                    Import external primenumbers to SQLite-database from .json-file. Example of .json-file content is: [ {"Id": 1, "PrimeNumber": "2" }, { "Id": 2, "PrimeNumber": "3" }, ... ].
+                </TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}">
+                    Tap button Cancel if you want to cancel import of data.
+                </TextBlock>
+                <TextBlock x:Name="FilenameTextBlock"
+                           Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"
+                           Margin="0,4,0,4"/>
+                <TextBlock x:Name="ImportedRecordsCountTextBlock"
+                           Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"
+                           Margin="0,4,0,4"/>
+            </StackPanel>
+        </Grid>
+        <!--page content goes here-->
+    </Grid>
+</Page>

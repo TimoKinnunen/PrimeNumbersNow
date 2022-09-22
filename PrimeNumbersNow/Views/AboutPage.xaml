@@ -1,0 +1,146 @@
+﻿<Page
+    x:Class="PrimeNumbersNow.Views.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="0,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="24,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0" 
+                   Style="{StaticResource PrimeNumbersNowTitleTextBlockStyle}" 
+                   Text="About"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="HomeAppBarButton"
+                              Tapped="HomeAppBarButton_Tapped"
+                              Label="Home"
+                              Icon="Home"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="PageContentScrollViewer"
+                      Grid.Row="2"
+                      Style="{StaticResource PageContentScrollViewerStyle}">
+            <StackPanel x:Name="PageContentStackPanel">
+
+                <!--page content goes here-->
+
+                <Grid x:Name="VersionGrid">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.RowSpan="3"
+                            Grid.Column="1" 
+                            BorderBrush="DimGray" 
+                            BorderThickness="1"
+                            IsHitTestVisible="False"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,40,0">
+                        <Border.Background>
+                            <SolidColorBrush Color="{ThemeResource SystemAccentColor}" />
+                        </Border.Background>
+                        <Image x:Name="PrimeNumbersNowImage"
+                               Stretch="None" />
+                    </Border>
+                    <TextBlock x:Name="AppDisplayNameTextBlock" 
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Margin="0,12,0,0" 
+                               Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"/>
+                    <TextBlock x:Name="PublisherTextBlock"
+                               Grid.Row="1"
+                               Grid.Column="0"
+                               Margin="0,12,0,0" 
+                               Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"/>
+                    <TextBlock x:Name="VersionTextBlock" 
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"/>
+
+                </Grid>
+
+                <HyperlinkButton Content="PrimeNumbersNow support website" 
+                                 Margin="0,12,0,0"
+                                 NavigateUri="https://PrimeNumbersNow10.blogspot.com/"
+                                 Style="{StaticResource TextBlockButtonStyle}"/>
+
+                <TextBlock Style="{StaticResource PrimeNumbersNowSubTitleTextBlockStyle}">Hunting primenumbers</TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}">
+                    Brute-force approach is best I can come up with for now. I have found a little magic to calculate primenumbers.
+                    And you get it free in this app!
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource PrimeNumbersNowSubTitleTextBlockStyle}">History behind this app</TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}">
+                    E-commerce and cryptography using primenumbers is fascinating and also primenumbers itself. And not to mention factorizing. And to decrypt messages on internet!
+                    This app uses SQLite database and stores primenumbers as strings.
+                    Earlier calculated primenumbers are used to evaluate if a number is primenumber.
+                    But there must be an algorithm that can calculate without predecessors. 
+                    All primes (except for 2) are on line y = 2x + 1 where x is positive integer. And primenumber's last digit is 1, 3, 7 or 9 (except for single 2 and 5).
+                </TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowSubTitleTextBlockStyle}">About this app</TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}">
+                    This app can calculate amazing big primenumbers, And it does it fast. 
+                    I am in love with BigInteger, SQLite-database! I use modulus (%) together with BigInteger.
+                    There is possibility to copy SQLite-database somewhere and look at its content with external tools.
+                    For example DB Browser for SQLite Version 3.12.2.
+                    I feel a satisfaction when I think of all possibilities in Mathematics to create a list of primenumbers.
+                </TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}">
+                    400 digit long primenumbers are not unusual when encrypting messages on Internet.
+                    It is common that it takes years to find a new primenumber of several 10 million digits.
+                    At writing moment biggest known prime number has about 23 million digits. It is 23 megabyte.
+                    It took someone (or some computer) 14 years to find biggest prime number.
+                </TextBlock>
+                <!--page content goes here-->
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

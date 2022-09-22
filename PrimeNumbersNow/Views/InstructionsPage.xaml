@@ -1,0 +1,105 @@
+﻿<Page
+    x:Class="PrimeNumbersNow.Views.InstructionsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="0,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="24,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0" 
+                   Style="{StaticResource PrimeNumbersNowTitleTextBlockStyle}" 
+                   Text="Instructions"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="HomeAppBarButton"
+                              Tapped="HomeAppBarButton_Tapped"
+                              Label="Home"
+                              Icon="Home"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="PageContentScrollViewer"
+                      Grid.Row="2"
+                      Style="{StaticResource PageContentScrollViewerStyle}">
+            <StackPanel x:Name="PageContentStackPanel">
+
+                <!--page content goes here-->
+                <TextBlock Style="{StaticResource PrimeNumbersNowSubTitleTextBlockStyle}">A prime number</TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}">
+                    A prime number (or a prime) is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+                    Examples of primenumbers are 2, 3, 5, 7....
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource PrimeNumbersNowSubTitleTextBlockStyle}">Home page</TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}">
+                    Browse primenumbers you have in database and search for a primenumber in your database.
+                    Export primenumbers to a .json-file.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource PrimeNumbersNowSubTitleTextBlockStyle}">Calculate new primenumbers page</TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}">
+                    This app lets you calculate new primenumbers. And those are saved in SQLite-database as strings.
+                    Because numbers are saved as strings in database table and casted to BigInteger we can bypass datatype integer limitations.
+                    The calculation approach is "brute-force" meaning that every primenumber candidate is divided by it's predecessors.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource PrimeNumbersNowSubTitleTextBlockStyle}">Export data</TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}">
+                    Make a backup of primenumbers to .json-file. You might lose data of different reasons.
+                    You can save a backup to removable media via export data!
+                    And you can copy database file (PrimeNumbersNow.db) and put it back later.
+                    Make a backup before deleting database or table. You can save files (*.*) in folder ...\LocalState to some other folder and it will be your backup. 
+                    This is SQLite-database file (PrimeNumbersNow.db) with data. Later on, if you need, you put it back.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource PrimeNumbersNowSubTitleTextBlockStyle}">Import data</TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}">
+                    Import a backup (.json-file) of primenumbers to database table.
+                    Warning: When you import data from a .json-file, you will lose all earlier calculated primenumbers.
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource PrimeNumbersNowSubTitleTextBlockStyle}">Export data before removing this app</TextBlock>
+                <TextBlock Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}">
+                    Make a backup of primenumbers to .json-file before removing this app. You can reload them later. It takes time though.
+                    Or copy database file (PrimeNumbersNow.db) to some other folder. Use external tool DB Browser for SQLite Version 3.12.2 to see data in it.
+                </TextBlock>
+                <!--page content goes here-->
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

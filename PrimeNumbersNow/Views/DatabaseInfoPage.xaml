@@ -1,0 +1,112 @@
+﻿<Page
+    x:Class="PrimeNumbersNow.Views.DatabaseInfoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="0,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="0,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="0,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PageTitleTextBlock.Margin" Value="12,0,0,0"/>
+                        <Setter Target="PageContentScrollViewer.Margin" Value="24,0,0,0"/>
+                        <Setter Target="AppBarButtonScrollViewer.Margin" Value="24,0,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="PageTitleTextBlock" 
+                   Grid.Row="0" 
+                   Style="{StaticResource PrimeNumbersNowTitleTextBlockStyle}" 
+                   Text="Database info"/>
+
+        <ScrollViewer x:Name="AppBarButtonScrollViewer"
+                      Grid.Row="1">
+            <StackPanel x:Name="AppBarButtonStackPanel"
+                        Orientation="Horizontal">
+                <AppBarButton x:Name="HomeAppBarButton"
+                              Tapped="HomeAppBarButton_Tapped"
+                              Label="Home"
+                              Icon="Home"/>
+                <AppBarButton x:Name="DeleteDatabaseTableAppBarButton"
+                              Margin="0,0,4,0"
+                              Tapped="DeleteDatabaseTableAppBarButton_Tapped"
+                              Label="Delete table"
+                              ToolTipService.ToolTip="Delete database table with primenumbers in SQLite-database."
+                              Icon="Delete"/>
+                <ProgressRing x:Name="DeleteDatabaseTableProgressRing"
+                              VerticalAlignment="Center"
+                              Margin="4,0,4,0"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="PageContentScrollViewer"
+                      Grid.Row="2"
+                      Style="{StaticResource PageContentScrollViewerStyle}">
+            <StackPanel x:Name="PageContentStackPanel">
+
+                <!--page content goes here-->
+                <Grid x:Name="VersionGrid">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Database resides here ...\LocalState\PrimeNumbersNow.db" 
+                               Grid.Row="0"
+                               Margin="0,4,4,4" 
+                               Style="{StaticResource PrimeNumbersNowSubTitleTextBlockStyle}"/>
+                    <TextBlock x:Name="PrimeNumbersNowFilePath"
+                               Grid.Row="1"
+                               Margin="0,4,4,4" 
+                               Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"
+                               FontSize="10"/>
+                    <TextBlock x:Name="PrimeNumbersNowFileSize"
+                               Grid.Row="2"
+                               Margin="0,4,4,4" 
+                               Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"/>
+                    <TextBlock x:Name="PrimeNumberItemsCount" 
+                               Grid.Row="3"
+                               Margin="0,4,4,4" 
+                               Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"/>
+                    <TextBlock x:Name="BiggestPrimeNumber" 
+                               Grid.Row="4"
+                               Margin="0,4,4,4" 
+                               Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"/>
+                    <TextBlock Text="SQLite database is sqlite-net-pcl by SQLite-net version 1.8.116." 
+                               Grid.Row="5"
+                               Margin="0,4,4,4" 
+                               Style="{StaticResource PrimeNumbersNowBodyTextBlockStyle}"/>
+                </Grid>
+                <!--page content goes here-->
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
